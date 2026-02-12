@@ -7,7 +7,7 @@ type RequestWithUser = Request & {
 };
 
 export const CurrentUser = createParamDecorator(
-  (_data: unknown, ctx: ExecutionContext): CurrentUserData => {
+  (_data:  unknown, ctx: ExecutionContext): CurrentUserData => {
     const request = ctx.switchToHttp().getRequest<RequestWithUser>();
     return request.user;
   },
