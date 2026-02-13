@@ -6,7 +6,7 @@ import { TransactionEntity } from '../../../../src/core/domain/entities/transact
 
 describe('CreateTransactionUseCase', () => {
   let useCase: CreateTransactionUseCase;
-  let mockRepository: any;
+  let mockRepository: { create: jest.Mock };
 
   beforeEach(async () => {
     mockRepository = {

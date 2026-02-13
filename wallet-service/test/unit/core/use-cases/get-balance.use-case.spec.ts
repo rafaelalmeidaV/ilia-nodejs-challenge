@@ -4,7 +4,7 @@ import { TRANSACTION_REPOSITORY } from '../../../../src/core/domain/repositories
 
 describe('GetBalanceUseCase', () => {
   let useCase: GetBalanceUseCase;
-  let mockRepository: any;
+  let mockRepository: { calculateBalance: jest.Mock };
 
   beforeEach(async () => {
     mockRepository = {

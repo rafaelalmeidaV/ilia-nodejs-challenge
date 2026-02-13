@@ -25,8 +25,12 @@ describe('WalletEntity', () => {
   it('should throw error when crediting zero or negative amount', () => {
     const wallet = new WalletEntity('user123', 1000);
 
-    expect(() => wallet.credit(0)).toThrow('credit amount must be greater than zero');
-    expect(() => wallet.credit(-100)).toThrow('credit amount must be greater than zero');
+    expect(() => wallet.credit(0)).toThrow(
+      'credit amount must be greater than zero',
+    );
+    expect(() => wallet.credit(-100)).toThrow(
+      'credit amount must be greater than zero',
+    );
   });
 
   it('should debit amount from wallet', () => {
@@ -40,8 +44,12 @@ describe('WalletEntity', () => {
   it('should throw error when debiting zero or negative amount', () => {
     const wallet = new WalletEntity('user123', 1000);
 
-    expect(() => wallet.debit(0)).toThrow('debit amount must be greater than zero');
-    expect(() => wallet.debit(-100)).toThrow('debit amount must be greater than zero');
+    expect(() => wallet.debit(0)).toThrow(
+      'debit amount must be greater than zero',
+    );
+    expect(() => wallet.debit(-100)).toThrow(
+      'debit amount must be greater than zero',
+    );
   });
 
   it('should check if wallet has sufficient balance', () => {
