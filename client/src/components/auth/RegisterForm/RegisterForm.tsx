@@ -8,6 +8,7 @@ import { Input } from '../../common/Input';
 import { Button } from '../../common/Button';
 import { ErrorMessage } from '../../common/ErrorMessage';
 import { isValidEmail, isValidPassword } from '../../../utils/validators';
+import { AxiosError } from 'axios';
 
 export const RegisterForm: React.FC = () => {
   const { t } = useTranslation();
@@ -28,7 +29,12 @@ export const RegisterForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const validate = () => {
-    const newErrors: any = {};
+    const newErrors: {
+      firstName?: string;
+      lastName?: string;
+      email?: string;
+      password?: string;
+    } = {};
 
     if (!firstName) newErrors.firstName = t('errors.required');
     if (!lastName) newErrors.lastName = t('errors.required');
@@ -67,8 +73,12 @@ export const RegisterForm: React.FC = () => {
 
       login(response);
       navigate('/dashboard');
-    } catch (err: any) {
-      setError(err.response?.data?.message || t('errors.registerFailed'));
+    } catch (err: unknown) {
+        if (err instanceof AxiosError) {
+            setError(err.response?.data?.message ?? t('errors.registerFailed'));
+        } else {
+            setError(t('errors.registerFailed'));
+        }
     } finally {
       setIsLoading(false);
     }

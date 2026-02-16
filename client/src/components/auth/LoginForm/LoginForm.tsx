@@ -8,6 +8,7 @@ import { Input } from '../../common/Input';
 import { Button } from '../../common/Button';
 import { ErrorMessage } from '../../common/ErrorMessage';
 import { isValidEmail, isValidPassword } from '../../../utils/validators';
+import { AxiosError } from 'axios';
 
 export const LoginForm: React.FC = () => {
   const { t } = useTranslation();
@@ -54,8 +55,12 @@ export const LoginForm: React.FC = () => {
 
       login(response);
       navigate('/dashboard');
-    } catch (err: any) {
-      setError(err.response?.data?.message || t('errors.loginFailed'));
+    } catch (err: unknown) {
+        if (err instanceof AxiosError) {
+            setError(err.response?.data?.message ?? t('errors.loginFailed'));
+        } else {
+            setError(t('errors.loginFailed'));
+        }
     } finally {
       setIsLoading(false);
     }

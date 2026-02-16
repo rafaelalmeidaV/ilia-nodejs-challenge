@@ -7,6 +7,7 @@ import { Input } from '../../common/Input';
 import { Button } from '../../common/Button';
 import { ErrorMessage } from '../../common/ErrorMessage';
 import { isValidAmount } from '../../../utils/validators';
+import { AxiosError } from 'axios';
 
 interface TransactionFormProps {
   onSuccess: () => void;
@@ -44,8 +45,12 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) =
       setAmount('');
       setType(TRANSACTION_TYPE.CREDIT);
       onSuccess();
-    } catch (err: any) {
-      setError(err.response?.data?.message || t('errors.transactionFailed'));
+    } catch (err: unknown) {
+        if (err instanceof AxiosError) {
+            setError(err.response?.data?.message ?? t('errors.transactionFailed'));
+        } else {
+            setError(t('errors.transactionFailed'));
+        }
     } finally {
       setIsLoading(false);
     }

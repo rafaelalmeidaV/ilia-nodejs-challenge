@@ -31,7 +31,9 @@
     "required": "This field is required",
     "loginFailed": "Login failed. Please check your credentials.",
     "registerFailed": "Registration failed. Please try again.",
-    "transactionFailed": "Transaction failed. Please try again."
+    "transactionFailed": "Transaction failed. Please try again.",
+    "failedToFetchBalance": "Failed to fetch balance",
+    "failedToFetchTransactions": "Failed to fetch transactions"
   },
   "common": {
     "loading": "Loading...",

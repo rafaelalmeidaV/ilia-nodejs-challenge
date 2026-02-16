@@ -31,7 +31,9 @@
     "required": "Este campo é obrigatório",
     "loginFailed": "Falha no login. Verifique suas credenciais.",
     "registerFailed": "Falha no registro. Tente novamente.",
-    "transactionFailed": "Falha na transação. Tente novamente."
+    "transactionFailed": "Falha na transação. Tente novamente.",
+    "failedToFetchBalance": "Falha ao buscar saldo",
+    "failedToFetchTransactions": "Falha ao buscar transações"
   },
   "common": {
     "loading": "Carregando...",

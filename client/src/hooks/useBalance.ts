@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { type Balance } from '../types/transaction.types';
 import { transactionsApi } from '../api/transactions.api';
+import { AxiosError } from 'axios';
+import { t } from 'i18next';
 
 export const useBalance = () => {
   const [balance, setBalance] = useState<Balance | null>(null);
@@ -13,8 +15,12 @@ export const useBalance = () => {
       setError(null);
       const data = await transactionsApi.getBalance();
       setBalance(data);
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to fetch balance');
+    } catch (err: unknown) {
+        if (err instanceof AxiosError) {
+            setError(err.response?.data?.message ?? t('errors.failedToFetchBalance'));
+        } else {
+            setError(t('errors.failedToFetchBalance'));
+        }
     } finally {
       setIsLoading(false);
     }
