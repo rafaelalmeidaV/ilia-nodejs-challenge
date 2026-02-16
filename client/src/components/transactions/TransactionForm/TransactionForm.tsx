@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../../hooks/useAuth';
 import { type TransactionType, type CreateTransactionRequest, TRANSACTION_TYPE } from '../../../types/transaction.types';
 import { transactionsApi } from '../../../api/transactions.api';
 import { Card } from '../../common/Card';
@@ -15,7 +14,6 @@ interface TransactionFormProps {
 
 export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) => {
   const { t } = useTranslation();
-  const { user } = useAuth();
   
   const [amount, setAmount] = useState('');
   const [type, setType] = useState<TransactionType>(TRANSACTION_TYPE.CREDIT);
@@ -37,7 +35,6 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onSuccess }) =
       setError(null);
 
       const data: CreateTransactionRequest = {
-        user_id: user!.id,
         amount: amountInCents,
         type,
       };
