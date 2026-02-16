@@ -1,8 +1,8 @@
 import axios, { AxiosError, type AxiosInstance } from 'axios';
 import { tokenService } from '../services/token.service';
 
-const WALLET_BASE_URL = import.meta.env.VITE_WALLET_API_URL || 'http://localhost:3001';
-const USERS_BASE_URL = import.meta.env.VITE_USERS_API_URL || 'http://localhost:3002';
+const WALLET_BASE_URL = import.meta.env.VITE_WALLET_API_URL
+const USERS_BASE_URL = import.meta.env.VITE_USERS_API_URL
 
 const createClient = (baseURL: string): AxiosInstance => {
   const client = axios.create({
