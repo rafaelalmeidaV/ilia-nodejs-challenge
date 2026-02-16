@@ -1,4 +1,160 @@
 # ília - Code Challenge NodeJS
+
+##  Quick Start
+
+### Prerequisites
+
+- Node.js 20+
+- Docker & Docker Compose
+- Git
+
+### Clone & Setup
+```bash
+git clone <your-fork-url>
+cd ilia-nodejs-challenge
+```
+
+### Environment Variables
+
+Copy the example env file:
+```bash
+cp .env.example .env
+```
+
+Default values:
+```bash
+MONGODB_USERNAME=admin
+MONGODB_PASSWORD=admin123
+WALLET_PORT=3001
+USERS_PORT=3002
+JWT_SECRET=ILIACHALLENGE
+JWT_INTERNAL_SECRET=ILIACHALLENGE_INTERNAL
+```
+
+### Running with Docker (Recommended)
+
+Start all services:
+```bash
+docker-compose up -d
+```
+
+View logs:
+```bash
+docker-compose logs -f wallet-service
+docker-compose logs -f users-service
+docker-compose logs -f client
+```
+
+Stop all services:
+```bash
+docker-compose down
+```
+
+Stop and remove volumes (clean database):
+```bash
+docker-compose down -v
+```
+
+### Running Locally (Development)
+
+#### 1. Start MongoDB only
+```bash
+docker-compose up -d wallet-mongodb users-mongodb
+```
+
+#### 2. Install dependencies
+```bash
+cd wallet-service && npm install
+cd ../user-service && npm install
+cd ../clientUI && npm install
+```
+
+#### 3. Run services
+```bash
+cd wallet-service && npm run start:dev
+cd user-service && npm run start:dev
+cd clientUI && npm run dev
+```
+
+### Access Points
+
+- **Frontend**: http://localhost:5173
+- **Wallet Service**: http://localhost:3001
+- **Users Service**: http://localhost:3002
+- **Wallet API Docs**: http://localhost:3001/api-docs
+- **Users API Docs**: http://localhost:3002/api-docs
+
+### Useful Commands
+
+#### Docker
+```bash
+docker-compose build                    # Rebuild all images
+docker-compose build wallet-service     # Rebuild specific service
+docker-compose up -d                    # Start in background
+docker-compose restart wallet-service   # Restart service
+docker-compose exec wallet-service sh   # Access container shell
+```
+
+#### MongoDB
+```bash
+docker exec -it wallet-mongodb mongosh -u admin -p admin123
+docker exec -it users-mongodb mongosh -u admin -p admin123
+```
+
+#### Testing
+```bash
+cd wallet-service
+npm run test              # Run unit tests
+npm run test:watch        # Watch mode
+npm run test:cov          # Coverage report
+npm run test:e2e          # E2E tests
+
+cd user-service
+npm run test              # Run unit tests
+npm run test:watch        # Watch mode
+npm run test:cov          # Coverage report
+```
+
+#### Linting
+```bash
+cd wallet-service && npm run lint
+cd user-service && npm run lint
+cd clientUI && npm run lint
+```
+
+### Project Structure
+```
+ilia-nodejs-challenge/
+├── wallet-service/       # Wallet microservice (port 3001)
+├── user-service/         # Users microservice (port 3002)
+├── client/             # React frontend (port 5173)
+├── docker-compose.yml    # Docker orchestration
+└── .env                  # Environment variables
+```
+
+### Troubleshooting
+
+**Port already in use:**
+```bash
+lsof -ti:3001 | xargs kill -9
+lsof -ti:3002 | xargs kill -9
+lsof -ti:5173 | xargs kill -9
+```
+
+**Clear Docker cache:**
+```bash
+docker system prune -a
+docker volume prune
+```
+
+**MongoDB connection issues:**
+```bash
+docker-compose down -v
+docker-compose up -d wallet-mongodb users-mongodb
+```
+
+---
+
 **English**
 ##### Before we start ⚠️
 **Please create a fork from this repository**
