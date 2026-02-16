@@ -85,6 +85,32 @@ services:
     networks:
       - app-network
 
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      target: development
+    container_name: client
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_WALLET_API_URL: http://localhost:${WALLET_PORT}
+      VITE_USERS_API_URL: http://localhost:${USERS_PORT}
+    depends_on:
+      - wallet-service
+      - users-service
+    volumes:
+      - ./client/src:/app/src
+      - ./client/public:/app/public
+      - ./client/index.html:/app/index.html
+      - ./client/package.json:/app/package.json
+      - ./client/vite.config.ts:/app/vite.config.ts
+      - ./client/tsconfig.json:/app/tsconfig.json
+      - /app/node_modules
+    networks:
+      - app-network
+
 volumes:
   wallet_mongo_data:
   users_mongo_data:
