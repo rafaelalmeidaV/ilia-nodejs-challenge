@@ -1,19 +1,19 @@
-name: Client Service Lint
+name: Client Lint
 
 on:
   pull_request:
     paths:
-      - 'client-service/**'
+      - 'client/**'
   push:
     branches:
       - main
       - 'feature/**'
     paths:
-      - 'client-service/**'
+      - 'client/**'
 
 jobs:
   lint:
-    name: Lint Client Service
+    name: Lint Client
     runs-on: ubuntu-latest
 
     defaults:
@@ -29,7 +29,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: client-service/package-lock.json
+          cache-dependency-path: client/package-lock.json
 
       - name: Install dependencies
         run: npm ci
