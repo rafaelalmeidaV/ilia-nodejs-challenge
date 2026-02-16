@@ -7,6 +7,7 @@ import { TransactionFilter } from '../../components/transactions/TransactionFilt
 import { useBalance } from '../../hooks/useBalance';
 import { useTransactions } from '../../hooks/useTransactions';
 import { type TransactionType } from '../../types/transaction.types';
+import { t } from 'i18next';
 
 export const Dashboard: React.FC = () => {
   const [filter, setFilter] = useState<TransactionType | undefined>(undefined);
@@ -31,7 +32,7 @@ export const Dashboard: React.FC = () => {
           />
 
           <div className="flex justify-between items-center">
-            <h2 className="text-xl font-bold text-gray-900">Transactions</h2>
+            <h2 className="text-xl font-bold text-gray-900">{t('transactions')}</h2>
             <TransactionFilter value={filter} onChange={setFilter} />
           </div>
 
