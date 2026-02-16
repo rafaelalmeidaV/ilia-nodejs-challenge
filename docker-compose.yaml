@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   wallet-mongodb:
     image: mongo:7
@@ -6,29 +8,45 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
-      MONGO_INITDB_DATABASE: ${MONGODB}
+      MONGO_INITDB_DATABASE: ${WALLET_DB_NAME}
     ports:
       - "27017:27017"
     volumes:
       - wallet_mongo_data:/data/db
     networks:
-      - wallet-network
+      - app-network
+
+  users-mongodb:
+    image: mongo:7
+    container_name: users-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${USERS_DB_NAME}
+    ports:
+      - "27018:27017"
+    volumes:
+      - users_mongo_data:/data/db
+    networks:
+      - app-network
 
   wallet-service:
     build:
-      context: .
+      context: ./wallet-service
       dockerfile: Dockerfile
       target: development
     container_name: wallet-service
     restart: unless-stopped
     ports:
-      - "3001:3001"
+      - "${WALLET_PORT}:${WALLET_PORT}"
     environment:
       NODE_ENV: ${NODE_ENV}
-      PORT: ${PORT}
-      MONGODB_URI: ${MONGODB_URI}
+      PORT: ${WALLET_PORT}
+      MONGODB_URI: ${WALLET_MONGODB_URI}
       JWT_SECRET: ${JWT_SECRET}
       JWT_INTERNAL_SECRET: ${JWT_INTERNAL_SECRET}
+      USERS_SERVICE_URL: ${USERS_SERVICE_URL}
     depends_on:
       - wallet-mongodb
     volumes:
@@ -38,11 +56,39 @@ services:
       - ./wallet-service/nest-cli.json:/app/nest-cli.json
       - /app/node_modules
     networks:
-      - wallet-network
+      - app-network
+
+  users-service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+      target: development
+    container_name: users-service
+    restart: unless-stopped
+    ports:
+      - "${USERS_PORT}:${USERS_PORT}"
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${USERS_PORT}
+      MONGODB_URI: ${USERS_MONGODB_URI}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_INTERNAL_SECRET: ${JWT_INTERNAL_SECRET}
+      WALLET_SERVICE_URL: ${WALLET_SERVICE_URL}
+    depends_on:
+      - users-mongodb
+    volumes:
+      - ./user-service/src:/app/src
+      - ./user-service/package.json:/app/package.json
+      - ./user-service/tsconfig.json:/app/tsconfig.json
+      - ./user-service/nest-cli.json:/app/nest-cli.json
+      - /app/node_modules
+    networks:
+      - app-network
 
 volumes:
   wallet_mongo_data:
+  users_mongo_data:
 
 networks:
-  wallet-network:
+  app-network:
     driver: bridge
