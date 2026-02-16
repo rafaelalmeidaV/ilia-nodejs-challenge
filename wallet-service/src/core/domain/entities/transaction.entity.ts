@@ -31,7 +31,7 @@ export class TransactionEntity {
       throw new Error('user_id is required');
     }
 
-    if (!this.amount || this.amount <= 0) {
+    if (!Number.isInteger(this.amount) || this.amount <= 0) {
       throw new Error('amount must be greater than zero');
     }
 
