@@ -1,0 +1,49 @@
+{
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "loginButton": "Sign In",
+    "registerButton": "Sign Up",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?"
+  },
+  "wallet": {
+    "balance": "Balance",
+    "totalBalance": "Total Balance",
+    "transactions": "Transactions",
+    "createTransaction": "New Transaction",
+    "credit": "Credit",
+    "debit": "Debit",
+    "amount": "Amount",
+    "type": "Type",
+    "filter": "Filter",
+    "all": "All"
+  },
+  "errors": {
+    "invalidEmail": "Invalid email address",
+    "invalidPassword": "Password must be at least 6 characters",
+    "invalidAmount": "Amount must be greater than zero",
+    "required": "This field is required",
+    "loginFailed": "Login failed. Please check your credentials.",
+    "registerFailed": "Registration failed. Please try again.",
+    "transactionFailed": "Transaction failed. Please try again.",
+    "failedToFetchBalance": "Failed to fetch balance",
+    "failedToFetchTransactions": "Failed to fetch transactions"
+  },
+  "common": {
+    "loading": "Loading...",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "noData": "No data available",
+    "error": "An error occurred"
+  }
+}

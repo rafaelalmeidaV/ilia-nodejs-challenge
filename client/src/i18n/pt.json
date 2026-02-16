@@ -1,0 +1,49 @@
+{
+  "auth": {
+    "login": "Entrar",
+    "register": "Registrar",
+    "logout": "Sair",
+    "email": "E-mail",
+    "password": "Senha",
+    "firstName": "Nome",
+    "lastName": "Sobrenome",
+    "loginButton": "Entrar",
+    "registerButton": "Criar Conta",
+    "noAccount": "Não tem uma conta?",
+    "hasAccount": "Já tem uma conta?"
+  },
+  "wallet": {
+    "balance": "Saldo",
+    "totalBalance": "Saldo Total",
+    "transactions": "Transações",
+    "createTransaction": "Nova Transação",
+    "credit": "Crédito",
+    "debit": "Débito",
+    "amount": "Valor",
+    "type": "Tipo",
+    "filter": "Filtrar",
+    "all": "Todas"
+  },
+  "errors": {
+    "invalidEmail": "E-mail inválido",
+    "invalidPassword": "A senha deve ter pelo menos 6 caracteres",
+    "invalidAmount": "O valor deve ser maior que zero",
+    "required": "Este campo é obrigatório",
+    "loginFailed": "Falha no login. Verifique suas credenciais.",
+    "registerFailed": "Falha no registro. Tente novamente.",
+    "transactionFailed": "Falha na transação. Tente novamente.",
+    "failedToFetchBalance": "Falha ao buscar saldo",
+    "failedToFetchTransactions": "Falha ao buscar transações"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "back": "Voltar",
+    "noData": "Nenhum dado disponível",
+    "error": "Ocorreu um erro"
+  }
+}
